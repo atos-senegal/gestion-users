@@ -60,8 +60,8 @@ public class Utilisateurs {
 	@Pattern(regexp = "(Male|Female|Other)$", message = "Gender must be Male, Female or Other")
 	@Column(name = "GENDER", nullable = true)
 	private String genre;
-	
+
 	@Column(nullable = false, unique = true)
 	@Email(message = "Email should be valid")
-    private String email;
+	private String email;
 }

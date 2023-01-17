@@ -9,18 +9,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
-    
+	private static final long serialVersionUID = 1L;
+
 	private final String resourceName;
-    private final String fieldName;
-    private final Long fieldValue;
+	private final String fieldName;
+	private final Long fieldValue;
 
-    public ResourceNotFoundException(String resourceName, String fieldName, Long fieldValue){
-        super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
-        this.resourceName = resourceName;
-        this.fieldName = fieldName;
-        this.fieldValue = fieldValue;
-    }
+	public ResourceNotFoundException(String resourceName, String fieldName, Long fieldValue) {
+		super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue));
+		this.resourceName = resourceName;
+		this.fieldName = fieldName;
+		this.fieldValue = fieldValue;
+	}
 }

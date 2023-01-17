@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,20 +32,8 @@ public class UtilisateursController {
 	@Operation(summary = "Register a user")
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<UtilisateursDto> createUtilisateur(@Valid @RequestBody UtilisateursDto utilisateursDto) {
-
-		try {
-			Period periode = Period.between(LocalDate.parse(utilisateursDto.getDateNaissance().toString()),
-					LocalDate.now());
-
-			if (utilisateursDto.getPaysResidence().equalsIgnoreCase("French") && periode.getYears() >= 18) {
-
-				UtilisateursDto savedUtilisateur = utilisateursService.saveUtilisateur(utilisateursDto);
-				return new ResponseEntity<>(savedUtilisateur, HttpStatus.CREATED);
-			}
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		UtilisateursDto savedUtilisateur = utilisateursService.saveUtilisateur(utilisateursDto);
+		return new ResponseEntity<>(savedUtilisateur, HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Get a user by its id")
@@ -66,7 +52,7 @@ public class UtilisateursController {
 
 	@Operation(summary = "Update a user by its id")
 	@PutMapping(path = "{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<UtilisateursDto> updateUser(@PathVariable("id") Long idUser,
+	public ResponseEntity<UtilisateursDto> updateUtilisateur(@PathVariable("id") Long idUser,
 			@RequestBody UtilisateursDto utilisateursDto) {
 		utilisateursDto.setId(idUser);
 		UtilisateursDto updatedUtilisateur = utilisateursService.updateUtilisateur(utilisateursDto);

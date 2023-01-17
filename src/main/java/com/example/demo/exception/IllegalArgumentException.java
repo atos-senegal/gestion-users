@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class EmailAlreadyExistsException extends RuntimeException {
+public class IllegalArgumentException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
 	private final String message;
 
-	public EmailAlreadyExistsException(String message) {
+	public IllegalArgumentException(String message) {
 		super(message);
 		this.message = message;
 	}

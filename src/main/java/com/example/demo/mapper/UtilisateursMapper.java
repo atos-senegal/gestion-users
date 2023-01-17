@@ -10,8 +10,8 @@ import com.example.demo.entity.Utilisateurs;
 public interface UtilisateursMapper {
 
 	UtilisateursMapper MAPPER = Mappers.getMapper(UtilisateursMapper.class);
-	
+
 	Utilisateurs mapToUtilisateursEntity(UtilisateursDto utilisateursDto);
-	
+
 	UtilisateursDto mapToUtilisateursDto(Utilisateurs utilisateurs);
 }

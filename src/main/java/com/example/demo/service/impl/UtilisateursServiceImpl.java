@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import com.example.demo.aop.LogEntryExit;
 import com.example.demo.dto.UtilisateursDto;
 import com.example.demo.entity.Utilisateurs;
 import com.example.demo.exception.EmailAlreadyExistsException;
+import com.example.demo.exception.IllegalArgumentException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.UtilisateursMapper;
 import com.example.demo.repository.UtilisateursRepository;
@@ -27,6 +30,17 @@ public class UtilisateursServiceImpl implements UtilisateursService {
 	@LogEntryExit(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
 	@Override
 	public UtilisateursDto saveUtilisateur(UtilisateursDto utilisateursDto) {
+
+		Period periode = Period.between(LocalDate.parse(utilisateursDto.getDateNaissance().toString()),
+				LocalDate.now());
+
+		if (periode.getYears() < 18) {
+			throw new IllegalArgumentException("Only adults are allowed to register.");
+		}
+
+		if (!utilisateursDto.getPaysResidence().equalsIgnoreCase("French")) {
+			throw new IllegalArgumentException("Only French residents are allowed to register.");
+		}
 
 		Optional<Utilisateurs> optionalUser = repository.findByEmail(utilisateursDto.getEmail());
 

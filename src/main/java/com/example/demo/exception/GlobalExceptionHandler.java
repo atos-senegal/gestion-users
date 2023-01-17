@@ -12,48 +12,46 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
-                                                                        WebRequest webRequest){
+	@ExceptionHandler(ResourceNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
+			WebRequest webRequest) {
 
-        ErrorDetails errorDetails = new ErrorDetails(
-                LocalDateTime.now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "USER_NOT_FOUND"
-        );
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				webRequest.getDescription(false), "USER_NOT_FOUND");
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
+		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
 
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
-                                                                        WebRequest webRequest){
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
+			WebRequest webRequest) {
 
-        ErrorDetails errorDetails = new ErrorDetails(
-                LocalDateTime.now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "USER_EMAIL_ALREADY_EXISTS"
-        );
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				webRequest.getDescription(false), "USER_EMAIL_ALREADY_EXISTS");
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-    }
+		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+	}
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
-                                                                          WebRequest webRequest){
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest) {
 
-        ErrorDetails errorDetails = new ErrorDetails(
-                LocalDateTime.now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "INTERNAL SERVER ERROR"
-        );
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				webRequest.getDescription(false), "INTERNAL_SERVER_ERROR");
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ErrorDetails> handleIllegalArgumentException(IllegalArgumentException exception,
+			WebRequest webRequest) {
+
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				webRequest.getDescription(false), "USER_ILLEGAL_ARGUMENT");
+
+		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+	}
 }
