@@ -25,6 +25,11 @@ After downloading the sources, we go to the command line directory and execute:
 * mvn spring-boot:run
 
 ---
+### Swagger Links (OpenAPI)
+
+* http://localhost:8080/swagger-ui/index.html
+
+---
 ### Postman Links
 
 GET method without parameter that returns the list of users :

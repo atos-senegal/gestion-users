@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
 public class IllegalArgumentException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

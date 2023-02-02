@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
@@ -45,13 +45,13 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public ResponseEntity<ErrorDetails> handleIllegalArgumentException(IllegalArgumentException exception,
 			WebRequest webRequest) {
 
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
 				webRequest.getDescription(false), "USER_ILLEGAL_ARGUMENT");
 
-		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(errorDetails, HttpStatus.FORBIDDEN);
 	}
 }

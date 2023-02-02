@@ -31,7 +31,24 @@ public class UtilisateursController {
 
 	@Operation(summary = "Register a user")
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<UtilisateursDto> createUtilisateur(@Valid @RequestBody UtilisateursDto utilisateursDto) {
+	public ResponseEntity<?> createUtilisateur(@Valid @RequestBody UtilisateursDto utilisateursDto) {
+
+		if (utilisateursDto.getNom() == null || utilisateursDto.getNom().isEmpty()) {
+			return new ResponseEntity<>("Name is required", HttpStatus.BAD_REQUEST);
+		}
+		if (utilisateursDto.getDateNaissance() == null) {
+			return new ResponseEntity<>("Birthdate is required", HttpStatus.BAD_REQUEST);
+		}
+		if (utilisateursDto.getPaysResidence() == null || utilisateursDto.getPaysResidence().isEmpty()) {
+			return new ResponseEntity<>("Country of residence is required", HttpStatus.BAD_REQUEST);
+		}
+
+		if (!utilisateursDto.getGenre().equalsIgnoreCase("Male")
+				&& !utilisateursDto.getGenre().equalsIgnoreCase("Female")
+				&& !utilisateursDto.getGenre().equalsIgnoreCase("Other")) {
+			return new ResponseEntity<>("Gender must be Male, Female or Other", HttpStatus.BAD_REQUEST);
+		}
+
 		UtilisateursDto savedUtilisateur = utilisateursService.saveUtilisateur(utilisateursDto);
 		return new ResponseEntity<>(savedUtilisateur, HttpStatus.CREATED);
 	}

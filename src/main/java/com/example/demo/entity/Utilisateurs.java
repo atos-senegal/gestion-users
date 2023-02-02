@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -47,7 +45,6 @@ public class Utilisateurs {
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	@NotNull(message = "Birthday is mandatory")
-	@Past(message = "Birthday must be a date in the past")
 	private LocalDate dateNaissance;
 
 	@Column(name = "RESIDENCE", nullable = false)
@@ -57,7 +54,6 @@ public class Utilisateurs {
 	@Column(name = "CALL", nullable = true)
 	private String telephone;
 
-	@Pattern(regexp = "(Male|Female|Other)$", message = "Gender must be Male, Female or Other")
 	@Column(name = "GENDER", nullable = true)
 	private String genre;
 
