@@ -1,13 +1,18 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM openjdk:11
 
-ARG JAR_FILE=target/blog.jar
+MAINTAINER Khalifa ndiaye.khalifa@gmail.com
 
-WORKDIR /opt/app
+ARG JAR_FILE=*.jar
 
-COPY ${JAR_FILE} blog.jar
+#WORKDIR /opt/gestion-users
 
-COPY entrypoint.sh entrypoint.sh
+COPY ${JAR_FILE} gestion-users.jar
+
+EXPOSE 8280
+
+#COPY entrypoint.sh entrypoint.sh
 
 RUN chmod 755 entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+#ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["java", "-jar", "gestion-users.jar"]

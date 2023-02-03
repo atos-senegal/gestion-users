@@ -1,3 +1,7 @@
+## Propriétés du serveur
+server:
+  port: 8280
+
 # H2 Database
 spring:
   datasource:
@@ -10,7 +14,6 @@ spring:
   h2:
     console:
       enabled: true
-
 
 # Logging
 logging:
