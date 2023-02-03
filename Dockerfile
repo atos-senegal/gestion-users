@@ -12,7 +12,7 @@ EXPOSE 8280
 
 #COPY entrypoint.sh entrypoint.sh
 
-RUN chmod 755 entrypoint.sh
+#RUN chmod 755 entrypoint.sh
 
 #ENTRYPOINT ["./entrypoint.sh"]
 ENTRYPOINT ["java", "-jar", "gestion-users.jar"]
