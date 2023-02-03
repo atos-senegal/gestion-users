@@ -2,7 +2,7 @@ FROM openjdk:11
 
 MAINTAINER Khalifa ndiaye.khalifa@gmail.com
 
-ARG JAR_FILE=*.jar
+ARG JAR_FILE=target/*.jar
 
 #WORKDIR /opt/gestion-users
 
