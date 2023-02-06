@@ -5,3 +5,9 @@
     command: docker build -t gestion-users:1.0 .
     args:
       chdir: /opt/docker/GestionUsersDockerJOB
+
+  - name: Creation du Tag de l'image gestion-users:1.0 pour le registry local
+    command: docker tag gestion-users:1.0 10.0.0.21:5000/gestion-users:1.0
+
+  - name: Push de l'image vers le registry local
+    command: docker push 10.0.0.21:5000/gestion-users:1.0
